@@ -1,0 +1,47 @@
+<div class="jumbotron">
+  <div class="container">
+    <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+          <input type="number" class="form-control" [(ngModel)]="product.seller.id" formControlName="sellerId" placeholder="Seller Product Code" >
+      </div>
+      <div class="form-group">
+          <input type="text" class="form-control" [(ngModel)]="product.name"formControlName="name" placeholder="Name">
+      </div>
+      <img class='imagem_artigo' src='{{product.primaryImg}}' alt='IMG DESC' width="300" height='300'>
+      <div class= "form-group">
+      <select id="category" formControlName="category">
+          <option *ngFor="let c of categories"  value ="{{c.id}}">  {{ c.name }}</option>
+      </select>
+      </div>
+      <div class="form-group">
+          <input type="text" class="form-control" [(ngModel)]="product.shortDescription" formControlName="shortDescription" placeholder="Short Description" >
+      </div>
+      <div class="form-group">
+          <input type="text" class="form-control" [(ngModel)]="product.longDescription"formControlName="longDescription" placeholder="Long Description">
+      </div>
+      <div class="form-group">
+          <input type="number"  [(ngModel)]="product.mrp" class="form-control" formControlName="mrp" placeholder="MRP" >
+      </div>
+      
+      <div class="form-group">
+          <input type="number" class="form-control" [(ngModel)]="product.ssp"formControlName="ssp" placeholder="SSP">
+      </div>
+      <div class="form-group">
+          <input type="number" class="form-control" [(ngModel)]="product.ymp"formControlName="ymp" placeholder="YMP" >
+      </div>
+      <div class="form-group">
+        <label for="primaryImage" >Primary Image</label>
+          {{product.primaryImage}}
+      </div>
+      <div class="form-group">
+          <label for="GalleryImages" >Primary Image</label>
+          <!-- <input type="file" (change)="onMultipleFileSelected($event)" class="form-control" accept="image/*" multiple formControlName="galleryImages" placeholder="Gallery Images"> -->
+
+      </div>
+      <div class="form-group" style="float:right">
+          <button class="btn btn-primary">Update Product</button>
+    </div>
+    </form>
+  </div>
+  </div>
+  
