@@ -3,10 +3,12 @@
       <div class="navbar-header ">
         <a class="navbar-brand" href="#">Your Mart</a>
       </div>
-      <a class="btn btn-outline-default" (click)="logout()">Logout</a>
-
-      <div><app-product-search (onSearch)="sendNewList($event)"></app-product-search>
-
-        </div>
+      <div><app-product-search (onSearch)="sendNewList($event)"></app-product-search></div>
+      <div>
+      <a margin="5px" class="btn btn-outline-default btn-primary" href="product/add">Add New Product</a>
+      
+      <a margin="5px"class="btn btn-outline-default btn-success" (click)="logout()">Logout</a>
+      </div>
+        
       </div>
       </nav>

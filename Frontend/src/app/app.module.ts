@@ -4,6 +4,8 @@ import {Routes, RouterModule} from '@angular/router'
 import {FormsModule,ReactiveFormsModule} from '@angular/forms'
 import { AppComponent } from './app.component';
 import { ProductListComponent } from './product-list/product-list.component';
+import { MatInputModule, MatTableModule, MatPaginatorModule, MatToolbarModule, MatSortModule } from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
 import { NgxCaptchaModule } from 'ngx-captcha';
 import { HttpClientModule } from '@angular/common/http';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -14,6 +16,7 @@ import { ProductEditComponent } from './product-edit/product-edit.component';
 import { SellerLoginComponent } from './seller-login/seller-login.component';
 import { SellerRegistrationComponent } from './seller-registration/seller-registration.component';
 import { AuthGuard } from './auth.guard';
+import { NavbarCommonComponent } from './navbar-common/navbar-common.component';
 
 const appRoutes: Routes=[
 {path:'products',component:ProductListComponent, canActivate: [AuthGuard]},
@@ -36,7 +39,8 @@ const appRoutes: Routes=[
     ProductAddComponent,
     ProductEditComponent,
     SellerLoginComponent,
-    SellerRegistrationComponent
+    SellerRegistrationComponent,
+    NavbarCommonComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +48,13 @@ const appRoutes: Routes=[
     FormsModule,
     ReactiveFormsModule,
     NgxCaptchaModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    MatInputModule,
+    MatTableModule,
+    MatSortModule,
+    MatPaginatorModule,
+    BrowserAnimationsModule,
+    MatToolbarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

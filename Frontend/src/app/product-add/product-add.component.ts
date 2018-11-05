@@ -21,7 +21,7 @@ export class ProductAddComponent implements OnInit {
   categories: Array<Category>;
   imageSrc;
   multipleImageSrc: Array<any> = new Array<any>();
-
+  public id =localStorage.getItem('userToken');
   constructor(private activatedRoute: ActivatedRoute,
     private formBuilder: FormBuilder,
     private productService: ProductService,
@@ -36,7 +36,7 @@ export class ProductAddComponent implements OnInit {
         this.categories = data;
       });
     this.productForm = this.formBuilder.group({
-      sellerId: ['', Validators.required],
+     
       name: ['', Validators.required],
       shortDescription: ['', Validators.required],
       longDescription: ['', Validators.required],
@@ -57,8 +57,10 @@ export class ProductAddComponent implements OnInit {
     this.loading = true;
     this.submitted = true;
     // console.log(this.productForm.value);
+    if (this.productForm.invalid) {
+      window.alert('Please Fill all the fields');
+    }
     
-    this.product.seller =(this.f.sellerId.value);
     console.log(this.product.seller);
     this.product.name = this.f.name.value;
     this.product.shortDescription = this.f.shortDescription.value;

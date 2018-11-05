@@ -16,6 +16,7 @@ export class SellerLoginComponent implements OnInit {
   loading = false;
   submitted = false;
   seller: Seller =new Seller;
+  retrievedSeller :Seller ; 
   public readonly siteKey = '6LcvoUgUAAAAAJJbhcXvLn3KgG-pyULLusaU4mL1';
   public theme: 'light' | 'dark' = 'light';
   public size: 'compact' | 'normal' = 'normal';
@@ -74,7 +75,7 @@ export class SellerLoginComponent implements OnInit {
     this.sellerService.getSeller(this.seller)
     .pipe(first())
       .subscribe(
-        data => {
+        data => { 
           console.log(data);
           window.localStorage.setItem("userToken",data.id)
           this.router.navigateByUrl('/products');

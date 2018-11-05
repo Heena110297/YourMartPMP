@@ -1,39 +1,53 @@
+<app-navbar-common></app-navbar-common>
 <div class="jumbotron">
 <div class="container">
   <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
-        <input type="number" class="form-control" formControlName="sellerId" placeholder="Seller Product Code" >
-    </div>
-    <div class="form-group">
-        <input type="text" class="form-control" formControlName="name" placeholder="Name">
+        <input type="text" class="form-control" formControlName="name" placeholder="Name" [ngClass]="{ 'is-invalid': submitted && f.name.errors }"/>
+        <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+        <div *ngIf="f.name.errors.required">Name is required</div>
+        </div>
     </div>
     <div class= "form-group">
-    <select id="category" formControlName="category">
+    <select id="category" formControlName="category" [ngClass]="{ 'is-invalid': submitted && f.category.errors }">
         <option *ngFor="let c of categories" value="{{c.id}}" >{{ c.name }}</option>
     </select>
+    <div *ngIf="submitted && f.category.errors" class="invalid-feedback">
+        <div *ngIf="f.category.errors.required">Category is required</div>
+        </div>
     </div>
     <div class="form-group">
-        <input type="text" class="form-control" formControlName="shortDescription" placeholder="Short Description" >
+        <input type="text" class="form-control" formControlName="shortDescription" placeholder="Short Description"  [ngClass]="{ 'is-invalid': submitted && f.shortDescription.errors }" >
+        <div *ngIf="submitted && f.shortDescription.errors" class="invalid-feedback">
+            <div *ngIf="f.shortDescription.errors.required">Short Description is required</div>
+            </div>
     </div>
     <div class="form-group">
         <input type="text" class="form-control" formControlName="longDescription" placeholder="Long Description">
+   
     </div>
     <div class="form-group">
-        <input type="number" class="form-control" formControlName="mrp" placeholder="MRP" >
+        <input type="number" class="form-control" formControlName="mrp" placeholder="MRP" [ngClass]="{ 'is-invalid': submitted && f.mrp.errors }" >
+        <div *ngIf="submitted && f.mrp.errors" class="invalid-feedback">
+            <div *ngIf="f.mrp.errors.required">MRP is required</div>
+            </div>
     </div>
     
     <div class="form-group">
         <input type="number" class="form-control" formControlName="ssp" placeholder="SSP">
     </div>
     <div class="form-group">
-        <input type="number" class="form-control" formControlName="ymp" placeholder="YMP" >
+        <input type="number" class="form-control" formControlName="ymp" placeholder="YMP" [ngClass]="{ 'is-invalid': submitted && f.ymp.errors }">
+        <div *ngIf="submitted && f.ymp.errors" class="invalid-feedback">
+            <div *ngIf="f.ymp.errors.required">YMP is required</div>
+            </div>
     </div>
     <div class="form-group">
       <label for="primaryImage" >Primary Image</label>
         <input type="file" (change)="onFileSelected($event)" class="form-control" accept="image/*" formControlName="primaryImage" placeholder="Image url" >
     </div>
     <div class="form-group">
-        <label for="GalleryImages" >Primary Image</label>
+        <label for="GalleryImages" >Gallery Image</label>
         <input type="file" (change)="onMultipleFileSelected($event)" class="form-control" accept="image/*" multiple formControlName="galleryImages" placeholder="Gallery Images">
     </div>
     <div class="form-group" style="float:right">

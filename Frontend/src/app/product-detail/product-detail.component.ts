@@ -6,6 +6,7 @@ import { CategoryService } from '../category.service';
 import { Product } from '../models/product.model';
 import { Category } from '../models/category.model';
 
+
 @Component({
   selector: 'app-product-detail',
   templateUrl: './product-detail.component.html',
@@ -43,7 +44,7 @@ export class ProductDetailComponent implements OnInit {
       this.categories = data;
     });
   this.productForm = this.formBuilder.group({
-    sellerId: ['', Validators.required],
+  
     name: ['', Validators.required],
     shortDescription: ['', Validators.required],
     longDescription: ['', Validators.required],
@@ -66,7 +67,7 @@ onSubmit() {
   this.submitted = true;
   // console.log(this.productForm.value);
   
-  this.product.seller =(this.f.sellerId.value);
+ 
   // console.log(this.product.seller);
   console.log(this.product.seller.id)
   this.product.name = this.f.name.value;

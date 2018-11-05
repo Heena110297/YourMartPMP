@@ -44,7 +44,7 @@ export class ProductService {
     console.log(product);
     return this.http.put(`${this.url}/${id}`,
     {"seller" : {
-      "id" : product.seller
+      "id" : Number(this.id)
     },
      "category":{
        "id" : product.category.id
