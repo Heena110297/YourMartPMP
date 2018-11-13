@@ -1,5 +1,6 @@
 package com.nagarro.YourMartPMPAdminPanel.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,11 +25,11 @@ public class ProductRestController {
 
 	@Autowired
 	ProductService productService;
-
-	@GetMapping("/product")
-	public List<Product> getProducts() {
-		System.out.println(" here ehere");
-		return productService.getProducts();
+	@CrossOrigin(origins="http://localhost:4200")
+	@GetMapping("/products/{sellerId}")
+	public List<Product> getProducts(@PathVariable int sellerId) {
+		System.out.println(sellerId);
+		return productService.getProductBySeller(sellerId);
 	}
 
 	@GetMapping("/product/{productId}")
@@ -42,7 +43,8 @@ public class ProductRestController {
 	@PostMapping("/product")
 	//@ResponseStatus(value=HttpStatus.OK)
 	public Product addProduct(@RequestBody Product theProduct) {
-		System.out.println(theProduct.getSeller().getId());
+		//System.out.println(theProduct.getSeller().getId());
+		theProduct.setCreated(new Date());
 		productService.saveProduct(theProduct);
 		return theProduct;
 	}

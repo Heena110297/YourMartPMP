@@ -16,4 +16,5 @@ public interface ProductService {
 	public List<Product> filter(int[] checkedSellerId, String[] checkedStatus, String[] checkedSellerCompany,String[] checkedCategory);
 	public List<Product> searchResultsForSeller(String searchText);
 	public void addComment(String comment, int productId);
+	public List<Product> getProductBySeller(int sellerId);
 }

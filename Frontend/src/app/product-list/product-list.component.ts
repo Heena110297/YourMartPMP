@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef,AfterViewInit  } from '@angular/core';
 import { ProductService } from '../product.service';
 import { Product } from '../models/product.model';
-import { ActivatedRoute } from '@angular/router';
+import {Router, ActivatedRoute } from '@angular/router';
 import {MatTableDataSource, MatPaginator, MatSort} from '@angular/material';
 
 @Component({
@@ -18,7 +18,7 @@ export class ProductListComponent implements OnInit  {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private activatedRoute:ActivatedRoute,  private productService :ProductService) {
+  constructor(private activatedRoute:ActivatedRoute,  private router: Router,  private productService :ProductService) {
    }
 
    applyFilter(filterValue: string) {
@@ -37,7 +37,7 @@ export class ProductListComponent implements OnInit  {
         this.dataCount = this.dataSource.length ;
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort ;
-        console.log(this.products[0].primaryImg);  
+       
      });
     }
 
@@ -47,5 +47,8 @@ public recieveNewList(products: any):void {
   this.products = products
 
 }
- 
+ onRowClick(row){
+  // console.log(row);
+   this.router.navigateByUrl('/product/'+row.id);
+ }
 }

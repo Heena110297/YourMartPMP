@@ -12,4 +12,5 @@ public interface ProductDAO {
 	public List<Product> searchResults(String string);
 	public List<Product> filter(int[] checkedSellerId, String[] checkedStatus, String[] checkedSellerCompany,String[] checkedCategory);
 	public List<Product> searchResultsForSeller(String searchText);
+	public List<Product> getProductBySeller(int sellerId);
 }

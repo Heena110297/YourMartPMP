@@ -3,6 +3,8 @@ package com.nagarro.YourMartPMPAdminPanel.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,6 +29,9 @@ public class ProductController {
 
 	@Autowired
 	private CategoryService categoryService;
+	
+	@Autowired
+    private JavaMailSender mailSender;
 
 	@RequestMapping("/product/list")
 	public String listProducts(Model theModel) {
@@ -104,6 +109,11 @@ public class ProductController {
 	
 	@RequestMapping("/product/addComment")
 	public String getProduct(@RequestParam("comment") String comment,@RequestParam("productId") int productId) {
+		SimpleMailMessage email = new SimpleMailMessage();
+        email.setTo("nimitjohri5@gmail.com");
+        email.setSubject("New Comment Recieved");
+        email.setText("YourMart admin has commented on your product : " + comment);
+        mailSender.send(email);
 		productService.addComment(comment,productId);
 		return "redirect:/product/?productId="+productId ;
 	}

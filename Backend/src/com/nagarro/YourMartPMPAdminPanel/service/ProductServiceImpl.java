@@ -83,4 +83,10 @@ public class ProductServiceImpl implements ProductService {
 		
 	}
 
+	@Override
+	@Transactional
+	public List<Product> getProductBySeller(int sellerId) {
+		return productDAO.getProductBySeller(sellerId);
+	}
+
 }

@@ -1,3 +1,6 @@
+<app-navbar-common>
+     
+</app-navbar-common>
 <div class="jumbotron">
   <div class="container">
         
@@ -5,34 +8,46 @@
    
     
       <div class="form-group">
-          <input type="text" class="form-control" [(ngModel)]="product.name"formControlName="name" placeholder="Name">
+          <input type="text" class="form-control" [(ngModel)]="product.name"formControlName="name"  readonly>
       </div>
      
       <div class= "form-group">
-      <select id="category" formControlName="category">
-          <option *ngFor="let c of categories"  value ="{{c.id}}">  {{ c.name }}</option>
-      </select>
+            <input type="text" class="form-control" [(ngModel)]="product.category.name"formControlName="category" readonly>
+      </div>
+
+      <div class="form-group">
+          <input type="text" class="form-control" [(ngModel)]="product.shortDescription" formControlName="shortDescription"  readonly>
       </div>
       <div class="form-group">
-          <input type="text" class="form-control" [(ngModel)]="product.shortDescription" formControlName="shortDescription" placeholder="Short Description" >
+          <input type="text" class="form-control" [(ngModel)]="product.longDescription"formControlName="longDescription" readonly >
       </div>
       <div class="form-group">
-          <input type="text" class="form-control" [(ngModel)]="product.longDescription"formControlName="longDescription" placeholder="Long Description">
+          <input type="number"  [(ngModel)]="product.mrp" class="form-control" formControlName="mrp" placeholder="MRP" readonly >
       </div>
-      <div class="form-group">
-          <input type="number"  [(ngModel)]="product.mrp" class="form-control" formControlName="mrp" placeholder="MRP" >
-      </div>
+      <div class = "form-group">
+          <!--Carousel Wrapper-->
+          
+<mdb-carousel [isControls]="true" class="carousel slide carousel-fade" [type]="'carousel-thumbnails'" [animation]="'fade'">
+        <!--First slide-->
+        
+        <mdb-carousel-item *ngFor = "let img of product.galleryImages">
+            <img class="img-responsive" height="300" width="500" src="{{img}}" alt="First slide">
+        </mdb-carousel-item>
       
-      <div class="form-group">
-          <input type="number" class="form-control" [(ngModel)]="product.ssp"formControlName="ssp" placeholder="SSP">
+    </mdb-carousel>
+    <!--/.Carousel Wrapper-->
       </div>
       <div class="form-group">
-          <input type="number" class="form-control" [(ngModel)]="product.ymp"formControlName="ymp" placeholder="YMP" >
+          <input type="number" class="form-control" [(ngModel)]="product.ymp"formControlName="ymp"  readonly >
       </div>
+      <div *ngIf="product.status ==='REJECTED'" class="form-group">
+            <input type="text" class="form-control" [(ngModel)]="product.comment" formControlName="comment"  readonly >
+        </div>
     
       <div class="form-group" style="float:right">
-          <button class="btn btn-primary">Update Product</button>
+          <button class="btn btn-primary">Edit Product</button>
     </div>
+   
     </form>
   </div>
   </div>

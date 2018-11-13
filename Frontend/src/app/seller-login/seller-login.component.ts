@@ -77,8 +77,18 @@ export class SellerLoginComponent implements OnInit {
       .subscribe(
         data => { 
           console.log(data);
+          if(data.status === "NEED_APPROVAL"){
+            window.alert('Please wait for your approval');
+            this.loading = false;
+          }
+          else if(data.status === "REJECTED"){
+            window.alert('You have been rejected');
+            this.loading = false;
+          }
+          else{
           window.localStorage.setItem("userToken",data.id)
-          this.router.navigateByUrl('/products');
+          this.router.navigateByUrl('/products/'+localStorage.getItem("userToken"));
+          }
         },
         error =>{
           window.alert('check  your credentials')

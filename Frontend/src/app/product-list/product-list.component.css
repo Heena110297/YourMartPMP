@@ -12,3 +12,7 @@
     font: 14px/1 FontAwesome;
     content: "\f0dc";
 }
+
+mat-row:hover {
+   background-color: cornflowerblue;
+}

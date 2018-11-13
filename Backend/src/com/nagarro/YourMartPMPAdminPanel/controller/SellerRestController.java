@@ -1,5 +1,6 @@
 package com.nagarro.YourMartPMPAdminPanel.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,17 +46,18 @@ public class SellerRestController {
 		if (newSeller == null) {
 			throw new SellerNotFoundException("Seller id Not Found - " + theSeller.getEmail());
 		}
-		if (theSeller.getPassword().equals(newSeller.getPassword()) && newSeller.getStatus().equalsIgnoreCase("Approved")) {
-			System.out.println("Validation successful");
+		if (theSeller.getPassword().equals(newSeller.getPassword())) {
+
 			return newSeller;
 		} else {
-			System.out.println("Wrong Credentials");
+
 			return null;
 		}
 	}
 
 	@PostMapping()
 	public void addSeller(@RequestBody Seller theSeller) {
+		theSeller.setRegisteredOn( new Date());
 		sellerService.saveSeller(theSeller);
 	}
 

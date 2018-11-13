@@ -15,7 +15,7 @@ import { Category } from '../models/category.model';
 export class ProductDetailComponent implements OnInit {
 
   constructor(private productService :ProductService,
-    
+ 
     private activatedRoute: ActivatedRoute,
     private formBuilder: FormBuilder,
     private router: Router,
@@ -27,8 +27,10 @@ export class ProductDetailComponent implements OnInit {
   product: Product = new Product;
   categories: Array<Category>;
   imageSrc;
+  galleryImages : Array<any>;
   multipleImageSrc: Array<any> = new Array<any>();
   id;
+  
   ngOnInit() {
     this.activatedRoute.params.subscribe(params => {
       this.id  = params['productId'];
@@ -36,6 +38,7 @@ export class ProductDetailComponent implements OnInit {
     .subscribe((data: Product) => {
       this.product= data;
       console.log(this.product);
+      console.log(this.product.galleryImages)
     });
 
     });
@@ -43,6 +46,7 @@ export class ProductDetailComponent implements OnInit {
     .subscribe(data => {
       this.categories = data;
     });
+    
   this.productForm = this.formBuilder.group({
   
     name: ['', Validators.required],
@@ -53,7 +57,8 @@ export class ProductDetailComponent implements OnInit {
     ssp: ['', Validators.required],
     ymp: ['', Validators.required],
     primaryImage: ['', Validators.required],
-    galleryImages: ['', Validators.required]
+    galleryImages: ['', Validators.required],
+    comment:['']
   });
   
 }
@@ -66,23 +71,7 @@ onSubmit() {
   this.loading = true;
   this.submitted = true;
   // console.log(this.productForm.value);
-  
- 
-  // console.log(this.product.seller);
-  console.log(this.product.seller.id)
-  this.product.name = this.f.name.value;
-  this.product.shortDescription = this.f.shortDescription.value;
-  this.product.longDescription = this.f.longDescription.value;
-  this.product.mrp = this.f.mrp.value;
-  this.product.ssp = this.f.ssp.value;
-  this.product.ymp = this.f.ymp.value;
+  this.router.navigateByUrl('/product/edit/'+this.product.id);
 
-  // this.product.primaryImg = this.imageSrc
-  // this.product.galleryImages = this.multipleImageSrc;
-  this.product.category =this.product.category;
-  this.productService.updateProduct(this.product, this.id)
-  .subscribe(() => {
-    this.router.navigateByUrl['products'];
-  })
 }
 }

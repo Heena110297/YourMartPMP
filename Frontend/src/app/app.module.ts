@@ -1,6 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule,NO_ERRORS_SCHEMA } from '@angular/core';
 import {Routes, RouterModule} from '@angular/router'
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
+
 import {FormsModule,ReactiveFormsModule} from '@angular/forms'
 import { AppComponent } from './app.component';
 import { ProductListComponent } from './product-list/product-list.component';
@@ -19,10 +21,11 @@ import { AuthGuard } from './auth.guard';
 import { NavbarCommonComponent } from './navbar-common/navbar-common.component';
 
 const appRoutes: Routes=[
-{path:'products',component:ProductListComponent, canActivate: [AuthGuard]},
+{path:'products/:sellerId',component:ProductListComponent, canActivate: [AuthGuard]},
 {path:'product/add',component:ProductAddComponent, canActivate: [AuthGuard]},
 {path:'seller/add' ,component:SellerRegistrationComponent},
 { path: 'product/' , component:ProductDetailComponent, canActivate: [AuthGuard]},
+{ path: 'product/edit/:productId' , component:ProductEditComponent,canActivate: [AuthGuard]},
 { path: 'product/:productId' , component:ProductDetailComponent,canActivate: [AuthGuard]},
 {path: 'login', component:SellerLoginComponent},
 {path: 'register', component:SellerRegistrationComponent},
@@ -43,6 +46,8 @@ const appRoutes: Routes=[
     NavbarCommonComponent
   ],
   imports: [
+  
+   
     BrowserModule,
     HttpClientModule,
     FormsModule,
@@ -54,9 +59,11 @@ const appRoutes: Routes=[
     MatSortModule,
     MatPaginatorModule,
     BrowserAnimationsModule,
+    MDBBootstrapModule.forRoot(),
     MatToolbarModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [NO_ERRORS_SCHEMA]
 })
 export class AppModule { }

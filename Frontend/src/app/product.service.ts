@@ -13,7 +13,7 @@ export class ProductService {
   public id =localStorage.getItem('userToken');
   constructor(private http: HttpClient) { }
   getProducts() {
-    return this.http.get<Array<Product>>(this.url);
+    return this.http.get<Array<Product>>(`${this.url}s/${this.id}`);
   }
 
   getSearchResults(searchText): Observable<Array<Product>> {

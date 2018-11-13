@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.hibernate.Criteria;
 import org.hibernate.FetchMode;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -148,6 +149,15 @@ public class ProductDAOImpl implements ProductDAO {
 		@SuppressWarnings("unchecked")
 		List<Product> result = jpaQuery.getResultList();
 		return result;
+	}
+
+	@Override
+	public List<Product> getProductBySeller(int sellerId) {
+		Session cs = sessionFactory.getCurrentSession();
+		Criteria criteria = cs.createCriteria(Product.class);
+		criteria.add(Restrictions.eq("seller.id", sellerId));
+        List<Product> products = criteria.list();
+		return products;
 	}
 
 }

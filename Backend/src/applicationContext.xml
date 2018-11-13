@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+ xmlns:task="http://www.springframework.org/schema/task"
+ xmlns:util="http://www.springframework.org/schema/util"
  xmlns:context="http://www.springframework.org/schema/context"
     xmlns:tx="http://www.springframework.org/schema/tx"
 xmlns:mvc="http://www.springframework.org/schema/mvc"
@@ -12,7 +14,12 @@ xsi:schemaLocation="
   http://www.springframework.org/schema/mvc
   http://www.springframework.org/schema/mvc/spring-mvc.xsd
   http://www.springframework.org/schema/tx 
-  http://www.springframework.org/schema/tx/spring-tx.xsd">
+  http://www.springframework.org/schema/tx/spring-tx.xsd
+  http://www.springframework.org/schema/context/spring-context.xsd
+  http://www.springframework.org/schema/util/ http://www.springframework.org/schema/util/spring-util.xsd
+  http://www.springframework.org/schema/task 
+  http://www.springframework.org/schema/task/spring-task-3.0.xsd
+  ">
   
 <!-- Add support for component scanning -->
 <context:component-scan base-package="com.nagarro.YourMartPMPAdminPanel" />
@@ -58,6 +65,29 @@ xsi:schemaLocation="
 </bean>
 <!-- Step 4: Enable configuration of transactional behavior based on annotations -->
 <tx:annotation-driven transaction-manager="myTransactionManager" />
+
+<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+        <property name="host" value="smtp.gmail.com" />
+        <property name="port" value="587" />
+        <property name="username" value="mittal.heena14@stu.upes.ac.in" />
+        <property name="password" value="Heena@11" />
+        <property name="javaMailProperties">
+            <props>
+                <prop key="mail.transport.protocol">smtp</prop>
+                <prop key="mail.smtp.auth">true</prop>
+                <prop key="mail.smtp.starttls.enable">true</prop>
+            </props>
+        </property>
+    </bean>
+    
+    <bean
+        class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+        <property name="exceptionMappings">
+            <props>
+                <prop key="java.lang.Exception">Error</prop>
+            </props>
+        </property>
+    </bean>   
 
  <!-- A handler for serving static resources -->
 <mvc:resources mapping="/resources/**" location="/resources/" />
